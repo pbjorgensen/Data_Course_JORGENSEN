@@ -1,0 +1,41 @@
+# Assignment 2 ####
+
+### List .csv files in Data folder and define that function ####
+list.files (path = '/Users/parkerjorgensen/Documents/Data_Course_JORGENSEN/Data', pattern = '.csv')
+csvfiles = list.files (path = '/Users/parkerjorgensen/Documents/Data_Course_JORGENSEN/Data', pattern = '.csv')
+
+### List amount of files and define contents of a file ####
+length(csvfiles)
+read.csv(file = 'wingspan_vs_mass.csv')
+df = read.csv(file = 'wingspan_vs_mass.csv')
+head(df)
+
+### Finding a file that starts with a character ####
+list.files(
+  path = '/Users/parkerjorgensen/Documents/Data_Course_JORGENSEN/Data', 
+  pattern = '^[b]', 
+  recursive = TRUE, 
+  full.names = TRUE)
+searchfiles_b = list.files(
+  path = '/Users/parkerjorgensen/Documents/Data_Course_JORGENSEN/Data', 
+  pattern = '^b', 
+  recursive = TRUE, 
+  full.names = TRUE)
+
+list.files(
+  pattern = ".csv",
+  recursive = TRUE,
+  full.names = TRUE)
+searchfiles_csv = list.files(
+  pattern = ".csv",
+  recursive = TRUE,
+  full.names = TRUE)
+
+### Command to display first line of specified files ####
+for (bfiles in searchfiles_b) {
+  print(readLines(bfiles, n = 1))
+  }
+
+for (csvfiles in searchfiles_csv) {
+  print(readLines(csvfiles, n = 1))
+}
