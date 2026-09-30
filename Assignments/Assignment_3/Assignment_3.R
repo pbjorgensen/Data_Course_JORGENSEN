@@ -157,24 +157,35 @@ dbinom(50,100,.5) # probability of getting exactly 50 heads out of 100 coin flip
 
 seq(2,150,2) # here's the code to get a list of the even numbers between 2 and 150
 
+library(tidyverse)
 
+iris |> 
+  slice(seq(2, n(), by = 2)) # using slice() and seq() to cut out rows
+
+iris |> 
+  filter(row_number() %% 2 == 0) # using filter(row_number()) to filter out rows
 
 # 2.  Create a new object called iris_chr which is a copy of iris, except where every column is a character class
 
-
+iris_char = iris |> 
+  mutate(across(everything(), as.character))
 
 # 3.  Create a new numeric vector object named "Sepal.Area" which is the product of Sepal.Length and Sepal.Width
 
-
+Sepal.Area = c(iris$Sepal.Length * iris$Sepal.Width)
 
 # 4.  Add Sepal.Area to the iris data frame as a new column
 
+iris = iris |> 
+  mutate(Sepal.Area = c(Sepal.Length * Sepal.Width), .before = Petal.Length)
 
+View(iris)
 
 # 5.  Create a new dataframe that is a subset of iris using only rows where Sepal.Area is greater than 20 
       # (name it big_area_iris)
 
-
+big_area_iris = iris |> 
+  filter(Sepal.Area > 20)
 
 # 6.  Upload the last numbered section of this R script (with all answers filled in and tasks completed) 
       # to canvas
