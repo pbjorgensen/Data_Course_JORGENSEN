@@ -284,3 +284,51 @@ ggplot(aes(x = body_mass_g,
   labs(x = 'Body Mass (g)',
        y = 'Bill Length (mm)')
 
+# 10/01/2026
+
+
+View(penguins)
+library(tidyverse)
+library(ggplot2)
+library(palmerpenguins)
+
+plot = penguins |> 
+  drop_na() |> 
+ggplot(aes(x = body_mass_g,
+           fill = species)) +
+  geom_density(alpha = 0.4, linetype = "dashed") +
+  labs(x = 'Body Mass (g)',
+       y = 'Density',
+       title = 'Penguin Body Mass Distribution by Species')
+
+str(plot)
+
+
+penguins |> 
+  group_by(species, body_mass_g) |> 
+  summarise(avg_mass_species = mean(body_mass_g)) |> 
+ggplot(aes(x = species,
+           y = avg_mass_species,
+           fill = species)) +
+  geom_col(stat = 'identity', alpha = 0.7) +
+  labs(x = 'Species',
+       y = 'Body Mass (g)',
+       title = 'Avg Body Mass by Penguin Species')
+  
+penguins |> 
+  ggplot(aes(x = body_mass_g,
+             y = bill_depth_mm,
+             color = species)) +
+  geom_point(alpha = 0.5) +
+  scale_color_manual(values = c('Adelie' = 'purple', 
+                                'Chinstrap' = 'orange', 
+                                'Gentoo' = 'red'))
+
+penguins |> 
+  ggplot(aes(x = body_mass_g,
+             y = bill_depth_mm,
+             color = species)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_wrap(sex)
+  
